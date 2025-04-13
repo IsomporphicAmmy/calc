@@ -48,6 +48,7 @@ void add_token(TokenArray *input_array, Token input_token)
 	}
 }
 
+// Convert all consecutive digit tokens in array to one token with a number
 void dig2num(TokenArray *input)
 {
 	TokenArray result = {0, NULL};
@@ -101,6 +102,7 @@ void dig2num(TokenArray *input)
 	input->arr_ptr = realloc(result.arr_ptr, sizeof(Token) * result.size);
 }
 
+// Produce an array of tokens from input string
 TokenArray tokenizer(char *input)
 {
 	TokenArray result = {0, NULL}; 
@@ -139,6 +141,8 @@ TokenArray tokenizer(char *input)
 	return result;
 }
 
+// Converts an input array of tokens into a tree of operations
+// TODO: Implement this shit
 Tree parser(const TokenArray *input_array)
 {
 	Tree result = {0, 0, 0, NULL};
@@ -159,6 +163,8 @@ int main()
 	char buffer[64];
 	fgets(buffer, 64, stdin);
 	TokenArray tokens = tokenizer(buffer);
+
+	// Show the content of token array
 	for(int i = 0; i < tokens.size; i++)
 	{
 		if (tokens.arr_ptr[i].type == NUMBER)
@@ -174,6 +180,7 @@ int main()
 			printf("Token type: OPERAND\nnum_value: %d\nvalue: %c\n", tokens.arr_ptr[i].num_value, tokens.arr_ptr[i].value);
 		}
 	}
+
 	free(tokens.arr_ptr);
 	Tree operation_tree = parser(&tokens);
 	printf("%d\n", operation_tree.branches_count);
