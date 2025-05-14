@@ -12,10 +12,10 @@ enum token_type
 
 typedef struct Tree
 {
-	int branches_count;
 	char operand;
 	int value;
-	struct Tree **branches;
+	struct Tree *leftTree;
+	struct Tree *rightTree;
 } Tree;
 
 typedef struct Token
@@ -143,19 +143,18 @@ TokenArray tokenizer(char *input)
 
 // Converts an input array of tokens into a tree of operations
 // TODO: Implement this shit
-Tree parser(const TokenArray *input_array)
+Tree parser(TokenArray input_array, Tree input_tree)
 {
-	Tree result = {0, 0, 0, NULL};
-	
-	for (int i = 0; i < input_array->size; i++)
+	Tree result = {'\0', 0, NULL, NULL};
+	if (input_tree.leftTree == NULL && input_tree.rightTree == NULL)
 	{
-		if(input_array->arr_ptr[i].value == '*' || input_array->arr_ptr[i].value == '/')
-		{
-			result.branches_count++;
-		}
+		
 	}
-	result.branches = malloc(sizeof(Tree*) * result.branches_count);
-	return result;
+}
+
+float compute(const Tree *tree)
+{
+		
 }
 
 int main()
